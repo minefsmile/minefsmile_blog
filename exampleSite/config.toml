@@ -1,0 +1,48 @@
+title = "Dear"
+baseURL = "https://github.com/minefsmile/minefsmile_blog"
+languageCode = "en-us"
+theme = ["github.com/theNewDynamic/gohugo-theme-ananke"]
+resourceDir = "../resources"
+
+DefaultContentLanguage = "en"
+SectionPagesMenu = "main"
+Paginate = 3 # this is set low for demonstrating with dummy content. Set to a higher number
+googleAnalytics = ""
+enableRobotsTXT = true
+
+[languages]
+  [languages.en]
+    title = "Ananke"
+    weight = 1
+    contentDir = "content/en"
+    # languageDirection = 'rtl' for Right-To-Left languages
+  [languages.fr]
+    title = "Ananke Fr"
+    weight = 2
+    contentDir = "content/fr"
+
+[sitemap]
+  changefreq = "monthly"
+  priority = 0.5
+  filename = "sitemap.xml"
+
+[params]
+  text_color = ""
+  author = ""
+  favicon = ""
+  site_logo = ""
+  description = "The last theme you'll ever need. Maybe."
+  # choose a background color from any on this page: https://tachyons.io/docs/themes/skins/ and preface it with "bg-"
+  background_color_class = "bg-black"
+  recent_posts_number = 3
+
+[params.valine] # 我把它默认甚至为关闭了，想打开可以修改 false 为 true，填写 valine 的 appId 和 appKey 即可开启 valine 的评论系统。（目前 valine 好评在下降，很多人更换了自己的评论系统，我还没有折腾，暂时不提供这部分教程了。想用的可以参考 <https://valine.js.org/> 操作手册）
+  enable = false
+    appId = ''
+    appKey = ''
+    placeholder = '既然来了，那就留个痕迹吧~'
+    visitor = true
+
+[[params.ananke_socials]]
+name = "twitter"
+url = "https://twitter.com/GoHugoIO"
