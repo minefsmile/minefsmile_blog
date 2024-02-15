@@ -1,26 +1,28 @@
-name: Deployment
+name: minefsmile # 任君喜欢
+
 on:
   push:
     branches:
-      - master
+      - master   # master 更新触发
+
 jobs:
-  deploy:
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [12.x]
+  build-deploy:
+    runs-on: ubuntu-18.04
     steps:
-    - uses: actions/checkout@v1
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v1
-      with:
-        node-version: ${{ matrix.node-version }}
-    - name: Install Packages
-      run: npm install
-    - name: Build page
-      run: npm run build
-    - name: Deploy to gh-pages
-      uses: peaceiris/actions-gh-pages@v3
-      with:
-        deploy_key: ${{ secrets.PERSONAL_TOKEN }}
-        publish_dir: ./build
+      - uses: actions/checkout@v1
+
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v2
+        with:
+          hugo-version: latest
+
+      - name: Build 
+        run: hugo
+
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          personal_token: ${{ secrets.personal_token }} # 填写你自己的 personal_token
+          PUBLISH_BRANCH: gh-pages  # 推送到当前 gh-pages 分支
+          PUBLISH_DIR: ./public  # hugo 生成到 public 作为跟目录
+          commit_message: ${{ github.event.head_commit.message }}
